@@ -53,6 +53,8 @@ public class Main {
                 
                 if (attempts == 0) {
                     System.out.println("Mission failed. Martians have shuffled the cargo locations. Try again!");
+                    randomizeCargoLocations (cargoLocations);
+                    attempts = 5;
                 } 
             }
         }
