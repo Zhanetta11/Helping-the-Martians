@@ -13,7 +13,7 @@ public class Main {
             cargoLocations[i] = random.nextInt(distance) + 1;
         }
     
-        System.out.println ("The Martians decided to put their cargo in 3 boxes of different sizes and bury them in different places on the way to the city.");
+        System.out.println ("The Martians have discreetly hidden their cargo in three different locations along the path.");
         
         randomizeCargoLocations (cargoLocations );
 
@@ -30,30 +30,34 @@ public class Main {
         }
     }
     
-    
     public static void guessingTheCargoLocations ( int [] cargoLocations ) {
         Scanner scanner = new Scanner(System.in);
         int attempts = 5;
         
         while (attempts > 0) {
-                System.out.println("Enter an estimated kilometer mark (1-7): ");
-                int estimatedLocation = scanner.nextInt();
-                int correctGuesses = checkGuess(estimatedLocation, cargoLocations);
+            System.out.println("Enter an estimated kilometer mark (1-7): ");
+            int[] estimatedLocation = new int[3];
+         
+            for (int i = 0; i < 3; i++) {
+                estimatedLocation [i] = scanner.nextInt();
+            }
+            
+            int correctGuesses = checkGuess( estimatedLocation, cargoLocations);
+            
+            if (correctGuesses == 3) {
+                System.out.println("Congratulations! You found all boxes!");
+            } 
+            else {
+                System.out.println("Number of correct guesses: " + correctGuesses);
+                attempts--;
                 
-                if (correctGuesses == 3) {
-                    System.out.println("Congratulations! You found all boxes!");
-                } 
-                else {
-                    System.out.println("Number of correct guesses: " + correctGuesses);
-                    attempts--;
-                }
-        }
                 if (attempts == 0) {
-                    randomizeCargoLocations (cargoLocations);
-                    System.out.println("Martians have shuffled the cargo locations. Please try again!");
-                }
-        
+                    System.out.println("Mission failed. Martians have shuffled the cargo locations. Try again!");
+                } 
+            }
+        }
     }
+    
     
     public static int checkGuess (int estimatedLocation, int[] cargoLocations) {
         int correctGuesses = 0;
