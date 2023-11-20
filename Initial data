@@ -8,29 +8,25 @@ public class Main {
         
         int distance = 7;
         int[] cargoLocations = new int[3];
-        
-        for (int i = 0; i < 3; i++) {
-            cargoLocations[i] = random.nextInt(distance) + 1;
-        }
     
         System.out.println ("The Martians have discreetly hidden their cargo in three different locations along the path.");
         
-        randomizeCargoLocations (cargoLocations );
+        randomizeCargoLocations (cargoLocations, distance );
 
-        System.out.println ("Suddenly, the Martians discovered that they had lost the map that marked where their valuable cargo was buried.\nLet's help the Martians find their cargo!\nYou have only 5 attempts to correctly guess the locations of the cargo boxes. After that, the boxes will be shuffled again, and the game restarts.\n ");
+        System.out.println ("Suddenly, the Martians discovered that they had lost the map that marked where their valuable cargo was buried.\n\nLet's help the Martians find their cargo!\nYou have only 5 attempts to correctly guess the locations of the cargo boxes.\nAfter that, the boxes will be shuffled again, and the game restarts.\n ");
         
-        guessingTheCargoLocations (cargoLocations);
+        guessingTheCargoLocations (cargoLocations, distance);
     }
     
     
-    public static void randomizeCargoLocations ( int[] cargoLocations ) {
+    public static void randomizeCargoLocations ( int[] cargoLocations, int distance ) {
         Random random = new Random();
         for (int i = 0; i < cargoLocations.length; i++) {
-           cargoLocations[i] = random.nextInt(7) + 1;  
+           cargoLocations[i] = random.nextInt(distance) + 1; 
         }
     }
     
-    public static void guessingTheCargoLocations ( int [] cargoLocations ) {
+    public static void guessingTheCargoLocations ( int [] cargoLocations, int distance ) {
         Scanner scanner = new Scanner(System.in);
         int attempts = 5;
         
@@ -56,13 +52,12 @@ public class Main {
                     scanner.nextLine();
                     clearConsole();
                     System.out.println("Mission failed. Martians have shuffled the cargo locations. Try again!");
-                    randomizeCargoLocations (cargoLocations);
+                    randomizeCargoLocations (cargoLocations, distance);
                     attempts = 5;
                 } 
             }
         }
     }
-    
     
     public static int checkGuess(int[] estimatedLocations, int[] cargoLocations) {
         int correctGuesses = 0;
